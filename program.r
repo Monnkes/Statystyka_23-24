@@ -2,12 +2,12 @@ library(plyr)
 library(ggplot2)
 
 
-pure_random_search <- function(objective_function, domain, num_points) {
+pure_random_search <- function(objective_function, domain, num_points, dimensions) {
   best_point <- numeric(length(domain))
   best_value <- Inf
 
   for (i in 1:num_points) {
-    random_point <- runif(length(domain)/2, min = domain[, 1], max = domain[, 2])
+    random_point <- runif(dimensions, min = domain[, 1], max = domain[, 2])
     value <- objective_function(random_point)
     if (value < best_value) {
       best_value <- value
@@ -18,47 +18,49 @@ pure_random_search <- function(objective_function, domain, num_points) {
   return(list(best_point = best_point, best_value = best_value))
 }
 
-create_histogram <- function(data, title, x_label, y_label) {
-  ggplot(data, aes(x = Result, fill = Method)) +
-    geom_histogram(binwidth = 1, position = "identity", alpha = 0.7) +
-    labs(title = title, x = x_label, y = y_label) +
-    theme_minimal()
+multi_start <- function(objective_function, domain, num_points, dimensions) {
+  best_point <- numeric(length(domain))
+  best_value <- Inf
+
+  for (i in 1:num_points) {
+    start_point <- runif(dimensions, min = domain[, 1], max = domain[, 2])
+    result <- optim(par = start_point, fn = objective_function, method = "L-BFGS-B")
+    
+    if (result$value < best_value) {
+      best_value <- result$value
+      best_point <- result$par
+    }
+  }
+
+  return(list(best_point = best_point, best_value = best_value))
 }
+
 
 
 main <- function(){
   ackley_function <- function(x) smoof::makeAckleyFunction(dimensions = length(x))(x)
   rastrigin_function <- function(x) smoof::makeRastriginFunction(dimensions = length(x))(x)
-  schwefel_function <- function(x) smoof::makeSchwefelFunction(dimensions = length(x))(x)
-  rosenbrock_function <- function(x) smoof::makeRosenbrockFunction(dimensions = length(x))(x)
 
   domain <- matrix(c(0, -2, 100, 1, 2, 1000), ncol = 2)
 
-  ackley_result <- pure_random_search(ackley_function, domain, num_points = 1000)
-
-  cat("Ackley function results:", "\n")
+  ackley_result <- pure_random_search(ackley_function, domain, num_points = 10,dimensions = 3)
+  cat("Ackley function results PRS:", "\n")
   print(ackley_result)
-  replicated_results <- replicate(5, pure_random_search(ackley_function, domain, num_points = 1000))
-  print(replicated_results)
+ 
 
-  ackley_data <- data.frame(
-  Method = c("Ackley Function", rep("Random Search", 5)),
-  Result = c(ackley_result$best_value, unlist(lapply(replicated_results, function(x) x$best_value))))
-
-  print(create_histogram(replicated_results, "Distribution of Ackley Results", "Function Value", "Frequency"))
-
-
-  rastrigin_result <- pure_random_search(rastrigin_function, domain, num_points = 1000)
-  cat("Rastrigin function results:", "\n")
+  rastrigin_result <- pure_random_search(rastrigin_function, domain, num_points = 10,dimensions = 3)
+  cat("Rastrigin function results PRS:", "\n")
   print(rastrigin_result)
 
-  schwefel_result <- pure_random_search(schwefel_function, domain, num_points = 1000)
-  cat("Schwefel function results:", "\n")
-  print(schwefel_result)
+  ackley_result <- multi_start(ackley_function, domain, num_points = 10,dimensions = 3)
+  cat("Ackley function results MS:", "\n")
+  print(ackley_result)
+ 
 
-  rosenbrock_result <- pure_random_search(rosenbrock_function, domain, num_points = 1000)
-  cat("Rosenbrock function results:", "\n")
-  print(rosenbrock_result)
+  rastrigin_result <- multi_start(rastrigin_function, domain, num_points = 10,dimensions = 3)
+  cat("Rastrigin function results MS:", "\n")
+  print(rastrigin_result)
+
 }
 
 main()
