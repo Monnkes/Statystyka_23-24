@@ -67,22 +67,22 @@ main <- function() {
     ackley_upper_bounds <- getUpperBoxConstraints(ackley)
     ackley_domain <- matrix(c(ackley_lower_bounds, ackley_upper_bounds), ncol = 2)
     
-    MS_ackley_vector <- replicate(5, multi_start(ackley_function, ackley_domain, num_points = 5, dim))
+    MS_ackley_vector <- replicate(50, multi_start(ackley_function, ackley_domain, num_points = 5, dim))
     MS_ackley_results <- MS_ackley_vector[1, ]
     MS_ackley_mean <- mean(MS_ackley_vector[2, ])
 
-    PRS_ackley_results <- replicate(5, pure_random_search(ackley_function, ackley_domain, num_points = MS_ackley_mean, dim))
+    PRS_ackley_results <- replicate(50, pure_random_search(ackley_function, ackley_domain, num_points = MS_ackley_mean, dim))
     
     rastrigin <- makeRastriginFunction(dim)
     rastrigin_lower_bounds <- getLowerBoxConstraints(rastrigin)
     rastrigin_upper_bounds <- getUpperBoxConstraints(rastrigin)
     rastrigin_domain <- matrix(c(rastrigin_lower_bounds, rastrigin_upper_bounds), ncol = 2)
     
-    MS_rastrigin_vector <- replicate(5, multi_start(rastrigin_function, rastrigin_domain, num_points = 5, dim))
+    MS_rastrigin_vector <- replicate(50, multi_start(rastrigin_function, rastrigin_domain, num_points = 5, dim))
     MS_rastrigin_results <- MS_rastrigin_vector[1, ]
     MS_rastrigin_mean <- mean(MS_rastrigin_vector[2, ])
 
-    PRS_rastrigin_results <- replicate(5, pure_random_search(rastrigin_function, rastrigin_domain, num_points = MS_rastrigin_mean, dim))
+    PRS_rastrigin_results <- replicate(50, pure_random_search(rastrigin_function, rastrigin_domain, num_points = MS_rastrigin_mean, dim))
     
     MS_ackley_avg <- c(MS_ackley_avg, mean(MS_ackley_results))
     MS_rastrigin_avg <- c(MS_rastrigin_avg, mean(MS_rastrigin_results))
@@ -95,6 +95,14 @@ main <- function() {
     ackley_analysis <- statistical_analysis(MS_ackley_results, PRS_ackley_results)
     rastrigin_analysis <- statistical_analysis(MS_rastrigin_results, PRS_rastrigin_results)
     
+    par(mfrow = c(1, 2))
+    hist(MS_ackley_results, breaks = 30)
+    hist(MS_rastrigin_results, breaks = 30)
+    
+    par(mfrow = c(1, 2))
+    hist(PRS_ackley_results, breaks = 30)
+    hist(PRS_rastrigin_results, breaks = 30)
+    
     print(paste("Ackley (", dim, " dimensions):"))
     print(paste("Confidence Interval: ", ackley_analysis$confidence_interval))
     print(paste("P-value: ", ackley_analysis$p_value))
@@ -104,6 +112,12 @@ main <- function() {
     print(paste("P-value: ", rastrigin_analysis$p_value))
     
   }
+  
+  
+  print(MS_ackley_avg)
+  print(MS_rastrigin_avg)
+  print(PRS_ackley_avg)
+  print(PRS_rastrigin_avg)
   
   values <- c()
    for (i in 1:length(dimensions)) {
