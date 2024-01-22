@@ -1,4 +1,3 @@
-library(plyr)
 library(ggplot2)
 library(smoof)
 
@@ -23,7 +22,7 @@ multi_start <- function(objective_function, domain, num_points, dimensions) {
     }
   }
 
-  return(best_value)
+  return(c(best_value,total_calls/num_points))
 }
 
 
@@ -68,16 +67,22 @@ main <- function() {
     ackley_upper_bounds <- getUpperBoxConstraints(ackley)
     ackley_domain <- matrix(c(ackley_lower_bounds, ackley_upper_bounds), ncol = 2)
     
-    MS_ackley_results <- replicate(5, multi_start(ackley_function, ackley_domain, num_points = 1, dim))
-    PRS_ackley_results <- replicate(5, pure_random_search(ackley_function, ackley_domain, num_points = 1, dim))
+    MS_ackley_vector <- replicate(5, multi_start(ackley_function, ackley_domain, num_points = 5, dim))
+    MS_ackley_results <- MS_ackley_vector[1, ]
+    MS_ackley_mean <- mean(MS_ackley_vector[2, ])
+
+    PRS_ackley_results <- replicate(5, pure_random_search(ackley_function, ackley_domain, num_points = MS_ackley_mean, dim))
     
     rastrigin <- makeRastriginFunction(dim)
     rastrigin_lower_bounds <- getLowerBoxConstraints(rastrigin)
     rastrigin_upper_bounds <- getUpperBoxConstraints(rastrigin)
     rastrigin_domain <- matrix(c(rastrigin_lower_bounds, rastrigin_upper_bounds), ncol = 2)
     
-    MS_rastrigin_results <- replicate(5, multi_start(rastrigin_function, rastrigin_domain, num_points = 1, dim))
-    PRS_rastrigin_results <- replicate(5, pure_random_search(rastrigin_function, rastrigin_domain, num_points = 1, dim))
+    MS_rastrigin_vector <- replicate(5, multi_start(rastrigin_function, rastrigin_domain, num_points = 5, dim))
+    MS_rastrigin_results <- MS_rastrigin_vector[1, ]
+    MS_rastrigin_mean <- mean(MS_rastrigin_vector[2, ])
+
+    PRS_rastrigin_results <- replicate(5, pure_random_search(rastrigin_function, rastrigin_domain, num_points = MS_rastrigin_mean, dim))
     
     MS_ackley_avg <- c(MS_ackley_avg, mean(MS_ackley_results))
     MS_rastrigin_avg <- c(MS_rastrigin_avg, mean(MS_rastrigin_results))
