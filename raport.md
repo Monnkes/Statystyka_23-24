@@ -37,33 +37,33 @@ Dla algorytmu MS, liczba punktów startowych wyniosła 100, a średnia liczba wy
 #### Wykresy
 
 <p align="center">
-  <img src="plots/HISTOGRAM_MS_n100_2.png" alt="HISTOGRAM_MS_n100_2">
+  <img src="Plots/HISTOGRAM_MS_n100_2.png" alt="HISTOGRAM_MS_n100_2">
 </p>
 
 <p align="center">
-  <img src="plots/HISTOGRAM_MS_n100_10.png" alt="HISTOGRAM_MS_n100_10">
+  <img src="Plots/HISTOGRAM_MS_n100_10.png" alt="HISTOGRAM_MS_n100_10">
 </p>
 
 <p align="center">
-  <img src="plots/HISTOGRAM_MS_n100_20.png" alt="HISTOGRAM_MS_n100_20">
+  <img src="Plots/HISTOGRAM_MS_n100_20.png" alt="HISTOGRAM_MS_n100_20">
 </p>
 
 <p align="center">
-  <img src="plots/HISTOGRAM_PRS_n100_2.png" alt="HISTOGRAM_PRS_n100_2">
+  <img src="Plots/HISTOGRAM_PRS_n100_2.png" alt="HISTOGRAM_PRS_n100_2">
 </p>
 
 <p align="center">
-  <img src="plots/HISTOGRAM_PRS_n100_10.png" alt="HISTOGRAM_PRS_n100_10">
+  <img src="Plots/HISTOGRAM_PRS_n100_10.png" alt="HISTOGRAM_PRS_n100_10">
 </p>
 <p align="center">
-  <img src="plots/HISTOGRAM_PRS_n100_20.png" alt="HISTOGRAM_PRS_n100_20">
+  <img src="Plots/HISTOGRAM_PRS_n100_20.png" alt="HISTOGRAM_PRS_n100_20">
 </p>
 <p align="center">
-  <img src="plots/BOXPLOT_n100.png" alt="BOXPLOT_n100">
+  <img src="Plots/BOXPLOT_n100.png" alt="BOXPLOT_n100">
 </p>
 
 <p align="center">
-  <img src="plots/POINTPLOT_n100.png" alt="POINTPLOT_n100">
+  <img src="Plots/POINTPLOT_n100.png" alt="POINTPLOT_n100">
 </p>
 
 
@@ -98,16 +98,15 @@ Przedział ufności jest również statystycznie istotny.
 
 __Wyniki dla funkcji Rastrigina:__
 _Wymiar 2:_
-Algorytm PRS uzyskał lepsze wyniki w minimalizacji funkcji Rastrigina niż algorytm MS.
+Algorytm MS uzyskał lepsze wyniki w minimalizacji funkcji Rastrigina niż algorytm PRS.
 Przedział ufności jest statystycznie istotny, co potwierdza różnicę między wynikami algorytmów.
 
 _Wymiar 10:_
-Algorytm PRS nadal osiąga lepsze wyniki, ale różnica nie jest już tak znacząca jak w przypadku dwóch wymiarów.
+Algorytm MS nadal osiąga lepsze wyniki, ale różnica nie jest już tak znacząca jak w przypadku dwóch wymiarów.
 Przedział ufności pozostaje jednak statystycznie istotny.
 
 _Wymiar 20:_
-
-Również dla 20 wymiarów algorytm PRS osiąga lepsze wyniki niż MS.
+Również dla 20 wymiarów algorytm MS osiąga lepsze wyniki niż PRS.
 Przedział ufności potwierdza statystyczną istotność wyników.
 
 #### Analiza Wykresów:
