@@ -1,0 +1,90 @@
+[1] 1333.49
+[1] 1128.52
+[1] "Ackley ( 2  dimensions):"
+
+    Paired t-test
+
+data:  results1 and results2
+t = -4.5755, df = 99, p-value = 1.38e-05
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -2.0062838 -0.7925413
+sample estimates:
+mean difference 
+      -1.399413 
+
+[1] "Rastrigin ( 2  dimensions):"
+
+    Paired t-test
+
+data:  results1 and results2
+t = -16.703, df = 99, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -1.664937 -1.311378
+sample estimates:
+mean difference 
+      -1.488158 
+
+[1] 1468.88
+[1] 1178.75
+[1] "Ackley ( 10  dimensions):"
+
+    Paired t-test
+
+data:  results1 and results2
+t = -3.2216, df = 99, p-value = 0.001726
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.4897477 -0.1164086
+sample estimates:
+mean difference 
+     -0.3030782 
+
+[1] "Rastrigin ( 10  dimensions):"
+
+    Paired t-test
+
+data:  results1 and results2
+t = -45.501, df = 99, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -54.35508 -49.81254
+sample estimates:
+mean difference 
+      -52.08381 
+
+[1] 1390.48
+[1] 1250.68
+[1] "Ackley ( 20  dimensions):"
+
+    Paired t-test
+
+data:  results1 and results2
+t = -30.864, df = 99, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -1.1266626 -0.9905481
+sample estimates:
+mean difference 
+      -1.058605 
+
+[1] "Rastrigin ( 20  dimensions):"
+
+    Paired t-test
+
+data:  results1 and results2
+t = -78.131, df = 99, p-value < 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -137.3931 -130.5875
+sample estimates:
+mean difference 
+      -133.9903
+
+
+[1]  2.625524 17.847858 18.697064
+[1]  0.3183869 29.4905011 91.9736037
+[1]  3.778983 18.041181 19.718255
+[1]   1.59390  83.70883 222.17043
+

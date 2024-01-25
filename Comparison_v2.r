@@ -82,6 +82,7 @@ main <- function() {
     
     PRS_rastrigin_results <- replicate(50, pure_random_search(rastrigin, num_points = MS_rastrigin_mean, rastrigin_domain))
     
+  
     MS_ackley_avg <- c(MS_ackley_avg, mean(MS_ackley_results))
     MS_rastrigin_avg <- c(MS_rastrigin_avg, mean(MS_rastrigin_results))
     PRS_ackley_avg <- c(PRS_ackley_avg, mean(PRS_ackley_results))
@@ -98,7 +99,14 @@ main <- function() {
     plot_density_comparison <- function(data, title) {
       hist(data, prob=TRUE, main=title, xlab="Value", ylab="Density", col="lightblue", border="black", breaks = 50)
       curve(dnorm(x, mean=mean(data), sd=sd(data)), add=TRUE, col="darkred", lwd=2)
-    }
+    
+      ecdf_plot <- ecdf(data)
+      plot(ecdf_plot, col="blue", main=NULL, xlab="Value", ylab="Cumulative Probability", lwd=2)
+      abline(h=0.5, col="green", lty=2)  # Linia w połowie maksymalnej wartości dystrybuanty
+      
+      # Krzywa dystrybuanty rozkładu normalnego
+      x_values <- seq(min(data), max(data), length.out=1000)
+      lines(x_values, pnorm(x_values, mean=mean(data), sd=sd(data)), col="purple", lwd=2)}
     
     plot_density_comparison(MS_ackley_results, paste("MS Ackley", dim, "D"))
     plot_density_comparison(MS_rastrigin_results, paste("MS Rastrigin", dim, "D"))
@@ -126,30 +134,37 @@ main <- function() {
     
   }
   
-  #print(MS_ackley_avg)
-  #print(MS_rastrigin_avg)
-  #print(PRS_ackley_avg)
-  #print(PRS_rastrigin_avg)
+  print(MS_ackley_avg)
+  print(MS_rastrigin_avg)
+  print(PRS_ackley_avg)
+  print(PRS_rastrigin_avg)
   
   values <- c()
   for (i in 1:length(dimensions)) {
     values <- c(values, MS_ackley_avg[i], MS_rastrigin_avg[i], PRS_ackley_avg[i], PRS_rastrigin_avg[i])
   }
   
-  df <- data.frame(
+  df1 <- data.frame(
     Method = rep(rep(c("MS", "PRS"), each = 2), length(dimensions)),
     Dimension = rep(dimensions, each = 4),
     Value = values
   )
   
-  plot_point <- ggplot(df, aes(x = as.factor(Dimension), y = Value, color = Method)) +
+  df2 <- data.frame(
+    Method = rep(c("MS_a","MS_r","PRS_a","PRS_r"), length(dimensions)),
+    Dimension = rep(dimensions, each = 4),
+    Value = values
+  )
+  
+  plot_point <- ggplot(df2, aes(x = as.factor(Dimension), y = Value, color = Method)) +
     geom_point(position = position_dodge(width = 0.8), size = 3) +
     labs(x = "Dimension", y = "Optimization Value", title = "Comparison of MS and PRS") +
     theme_minimal()
   
   print(plot_point)
   
-  plot_boxplot <- ggplot(df, aes(x = as.factor(Dimension), y = Value, color = Method)) +
+  
+  plot_boxplot <- ggplot(df1, aes(x = as.factor(Dimension), y = Value, color = Method)) +
     geom_boxplot(position = position_dodge(width = 0.8), width = 0.7, alpha = 0.7) +
     labs(x = "Dimension", y = "Optimization Value", title = "Comparison of MS and PRS") +
     theme_minimal()

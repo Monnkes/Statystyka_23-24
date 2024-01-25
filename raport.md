@@ -1,9 +1,16 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+---
 ## Porównanie Algorytmów Minimalizacji Stochastycznej
 ###### Opracowali: Mateusz Sacha, Łukasz Kluza
 ---
+<div style="text-align: justify">
 
 #### Wprowadzenie
-Celem tego projektu zaliczeniowego było porównanie efektywności dwóch z trzech algorytmów minimalizacji stochastycznej: Poszukiwania Przypadkowego (Pure Random Search, PRS), Metody Wielokrotnego Startu (Multi-Start, MS) oraz Algorytmu Genetycznego (GA). Zdecydowaliśmy się na algorytm _Poszukiwania Przypadkowego_  oraz _Metodę Wielokrotnego Startu_. Analiza została przeprowadzona na funkcjach Ackley'a i Rastrigina o różnej liczbie wymiarów: 2, 10 i 20.
+Celem tego projektu było porównanie efektywności dwóch z trzech algorytmów minimalizacji stochastycznej: Poszukiwania Przypadkowego (Pure Random Search, PRS), Metody Wielokrotnego Startu (Multi-Start, MS) oraz Algorytmu Genetycznego (GA). Zdecydowaliśmy się na algorytm _Poszukiwania Przypadkowego_  oraz _Metodę Wielokrotnego Startu_. Analiza została przeprowadzona na funkcjach _Ackley'a_ i _Rastrigina_ o różnej liczbie wymiarów: 2, 10 i 20.
 
 #### Algorytmy
 - Poszukiwanie Przypadkowe (PRS)
@@ -16,54 +23,100 @@ Algorytm MS polega na losowaniu punktów, a następnie uruchamianiu algorytmu op
 Do analizy wybrano funkcje Ackley'a i Rastrigina. Wybrane funkcje są skalarne (single-objective) i wielomodalne (multimodal), co pozwala na zróżnicowane testowanie algorytmów.
 
 #### Procedura Porównawcza
-Dla każdej funkcji i liczby wymiarów osobno, przeprowadzono 50 uruchomień każdego algorytmu.
+Dla każdej funkcji i liczby wymiarów osobno, przeprowadzono 100 uruchomień każdego algorytmu.
 Średni wynik algorytmu obliczono jako średnią znalezionych minimów.
 Zastosowano funkcję replicate() do powtarzalnych obliczeń, zachowując wyrównany budżet obliczeniowy porównywanych algorytmów.
 
 #### Budżet Obliczeniowy
 Dla algorytmu MS, liczba punktów startowych wyniosła 100, a średnia liczba wywołań z uruchomień MS była przyjętą wartością budżetu dla algorytmu PRS.
 
+<br><br><br><br><br><br>
+
 #### Wyniki
 | Algorytm | Dim | ackley_function | rastrigin_function |
-|----------|-----|-----------------|---------------------|
-| **PRS**  | 2   | 9.50265         |7.258155             |
-|          | 10  | 18.98935        | 98.018893           |
-|          | 20  | 19.99352        | 234.176595          |
-| **MS**   | 2   | 2.093723        | 0.4178828           |
-|          | 10  | 17.946352       | 31.2416235          |
-|          | 20  |18.672037        | 92.0134158          |
+|----------|-----|-----------------|--------------------|
+| **MS**   | 2   | 2.625524        | 0.3183869          |
+|          | 10  | 17.847858       | 29.4905011         |
+|          | 20  | 18.697064       | 91.9736037         |
+| **PRS**  | 2   | 3.778983        | 1.59390            |
+|          | 10  | 18.041181       | 83.70883           |
+|          | 20  | 19.718255       | 222.17043          |
+</div>
 
 
 #### Wykresy
 
+__Wykres gęstości i dystrybuant__ 
+_(oraz porównania w rozkładem normalnym)_
+
 <p align="center">
-  <img src="Plots/HISTOGRAM_MS_n100_2.png" alt="HISTOGRAM_MS_n100_2">
+  <img src="Plots/MS_Ackley_2D.png" alt="MS_Ackley_2D">
 </p>
 
 <p align="center">
-  <img src="Plots/HISTOGRAM_MS_n100_10.png" alt="HISTOGRAM_MS_n100_10">
+  <img src="Plots/MS_Rastrigin_2D.png" alt="MS_Rastrigin_2D">
 </p>
 
 <p align="center">
-  <img src="Plots/HISTOGRAM_MS_n100_20.png" alt="HISTOGRAM_MS_n100_20">
+  <img src="Plots/PRS_Ackley_2D.png" alt="PRS_Ackley_2D.png">
 </p>
 
 <p align="center">
-  <img src="Plots/HISTOGRAM_PRS_n100_2.png" alt="HISTOGRAM_PRS_n100_2">
+  <img src="Plots/PRS_Rastrigin_2D.png" alt="PRS_Rastrigin_2D">
 </p>
 
 <p align="center">
-  <img src="Plots/HISTOGRAM_PRS_n100_10.png" alt="HISTOGRAM_PRS_n100_10">
+  <img src="Plots/MS_Ackley_10D.png" alt="MS_Ackley_10D">
 </p>
 <p align="center">
-  <img src="Plots/HISTOGRAM_PRS_n100_20.png" alt="HISTOGRAM_PRS_n100_20">
+  <img src="Plots/MS_Rastrigin_10D.png" alt="MS_Rastrigin_10D">
 </p>
 <p align="center">
-  <img src="Plots/BOXPLOT_n100.png" alt="BOXPLOT_n100">
+  <img src="Plots/PRS_Ackley_10D.png" alt="PRS_Ackley_10D">
 </p>
 
 <p align="center">
-  <img src="Plots/POINTPLOT_n100.png" alt="POINTPLOT_n100">
+  <img src="Plots/MS_Ackley_20D.png" alt="MS_Ackley_20D">
+</p>
+<p align="center">
+  <img src="Plots/MS_Rastrigin_20D.png" alt="MS_Rastrigin_20D">
+</p>
+<p align="center">
+  <img src="Plots/PRS_Ackley_20D.png" alt="PRS_Ackley_20D">
+</p>
+<p align="center">
+  <img src="Plots/PRS_Rastrigin_20D.png" alt="PRS_Rastrigin_20D">
+</p>
+
+__Wykresy pudełkowe__
+
+<p align="center">
+  <img src="Plots/MS_2D.png" alt="MS_Ackley_20D">
+</p>
+<p align="center">
+  <img src="Plots/PRS_2D.png" alt="MS_Rastrigin_20D">
+</p>
+<p align="center">
+  <img src="Plots/MS_10D.png" alt="MS_Ackley_20D">
+</p>
+<p align="center">
+  <img src="Plots/PRS_10D.png" alt="MS_Rastrigin_20D">
+</p>
+<p align="center">
+  <img src="Plots/MS_20D.png" alt="MS_Ackley_20D">
+</p>
+<p align="center">
+  <img src="Plots/PRS_20D.png" alt="MS_Rastrigin_20D">
+</p>
+
+__Porównanie__
+
+<p align="center">
+  <img src="Plots/BOXPLOT_MSvsPRS.png" style="width: 690px; height: 420px;" alt="BOXPLOT_MSvsPRS.png">
+</p>
+
+<p align="center">
+  <img src="Plots/POINTPLOT_MSvsPRS.png" alt="POINTPLOT_MSvsPRS.png">
 </p>
 
 
@@ -71,74 +124,51 @@ Dla algorytmu MS, liczba punktów startowych wyniosła 100, a średnia liczba wy
 
 #### Analiza Danych 
 
-| Funkcja | Wymiar | Algorytm | Średni Wynik | Przedział Ufności (95%) (Od) | Przedział Ufności (95%) (Do) | Test hipotezy zerowej |
-|---------|--------|----------|----------|----------|----------|----|
-| Ackley     | 2  | MS  | 3.47001968819578e-22 | -8.57198813879057  | -6.24586491250253  | Odrzuamy |
-| Rastrigin  | 2  | PRS | 8.55373939846609e-19 | -7.84133241450304  | -5.83921125848375  | Odrzuamy |
-| Ackley     | 10 | MS  | 3.1928688588889e-15  | -1.26415460269664  | -0.821839055716593 | Odrzuamy |
-| Rastrigin  | 10 | PRS | 1.36019908007974e-52 | -70.5366461565981  | -63.0178932607597  | Odrzuamy |
-| Ackley     | 20 | MS  | 1.38872501800785e-40 | -1.43585391351074  | -1.20710453980896  | Odrzuamy |
-| Rastrigin  | 20 | PRS | 1.48057245516509e-66 | -148.361908348892  | -135.964449187906  | Odrzuamy |
+Poniższa tablea danych przedstawionych wyniki eksperymentu porównawczego pomiędzy algorytmami Poszukiwania Przypadkowego (PRS) a Metodą Wielokrotnego Startu (MS) na funkcjach Ackley'a i Rastrigina, w różnych wymiarach.
 
-Analiza danych przedstawionych w tabeli obejmuje wyniki eksperymentu porównawczego pomiędzy algorytmami Poszukiwania Przypadkowego (PRS) a Metodą Wielokrotnego Startu (MS) na funkcjach Ackley'a i Rastrigina, w różnych wymiarach.
+<div style="text-align:center;">
 
-__Wyniki dla funkcji Ackley:__
+| Function | Dimension |t| p-value | 95 percent confidence interval (from)| 95 percent confidence interval (To) | mean difference | 
+|---------|-------|----|----------|----------|----------|----------|
+| Ackley     | 2  | -4.5755 | 1.38e-05  | -2.0062838  | -0.7925413 | -1.399413   | 
+| Rastrigin  | 2  | -16.703 | < 2.2e-16 | -1.664937   | -1.311378  | -1.488158   | 
+| Ackley     | 10 | -3.2216 | 0.001726  | -0.4897477  | -0.1164086 | -0.3030782  |
+| Rastrigin  | 10 | -45.501 | < 2.2e-16 | -54.35508   | -49.81254  | -52.08381   | 
+| Ackley     | 20 | -30.864 | < 2.2e-16 | -1.1266626  | -0.9905481 | -1.058605   | 
+| Rastrigin  | 20 | -78.131 |< 2.2e-16  | -137.3931   | -130.5875  | -133.9903   | 
 
-_Wymiar 2:_
-Algorytm MS osiągnął średni wynik bliski zeru, co sugeruje skuteczność w minimalizacji funkcji Ackley w dwóch wymiarach.
-Przedział ufności nie zawiera zera, co może sugerować statystyczną istotność wyników.
+</div>
 
-_Wymiar 10:_
-Algorytm MS również osiągnął bliski zeru średni wynik, co wskazuje na skuteczność w wyższych wymiarach.
-Ponownie przedział ufności jest istotny statystycznie.
 
-_Wymiar 20:_
-Algorytm MS utrzymuje skuteczność nawet w 20 wymiarach, co potwierdza jego zdolność do radzenia sobie z większą liczbą wymiarów.
-Przedział ufności jest również statystycznie istotny.
 
-__Wyniki dla funkcji Rastrigina:__
-_Wymiar 2:_
-Algorytm MS uzyskał lepsze wyniki w minimalizacji funkcji Rastrigina niż algorytm PRS.
-Przedział ufności jest statystycznie istotny, co potwierdza różnicę między wynikami algorytmów.
-
-_Wymiar 10:_
-Algorytm MS nadal osiąga lepsze wyniki, ale różnica nie jest już tak znacząca jak w przypadku dwóch wymiarów.
-Przedział ufności pozostaje jednak statystycznie istotny.
-
-_Wymiar 20:_
-Również dla 20 wymiarów algorytm MS osiąga lepsze wyniki niż PRS.
-Przedział ufności potwierdza statystyczną istotność wyników.
+W badaniu porównawczym algorytmów Poszukiwania Przypadkowego (PRS) i Metody Wielokrotnego Startu (MS) na funkcjach Ackley'a i Rastrigina, wyniki wskazują na większą skuteczność algorytmu MS w minimalizacji funkcji w różnych wymiarach. Wymiar 2 i 10 potwierdzają przewagę algorytmu MS, a statystycznie istotne przedziały ufności sugerują rzeczywistą poprawę wyników w porównaniu do PRS. Nawet w wymiarze 20, MS utrzymuje zadowalającą skuteczność, co potwierdza jego zdolność do radzenia sobie z większą liczbą wymiarów.
 
 #### Analiza Wykresów:
 - **Wymiar 2:**
-
-_Analiza:_
 Histogramy pokazują rozkłady wyników dla obu algorytmów.
 Boxploty przedstawiają rozproszenie wyników w sposób graficzny.
 Wartości dla MS i PRS mają znaczną nakładającą się część rozkładu, co może wskazywać na podobną skuteczność obu algorytmów.
 <br>
 - **Wymiar 10:**
-
-_Analiza:_
 Histogramy dla MS i PRS wskazują na zbliżone rozkłady wyników.
 Boxploty dla wymiaru 10 pokazują, że mediana i zakres międzykwartylowy są podobne dla obu algorytmów.
 <br>
 - **Wymiar 20:**
-
-_Analiza:_
 Histogramy dla wymiaru 20 również wykazują podobieństwo między rozkładami wyników MS i PRS.
-
-Test hipotezy zerowej można przeprowadzić, aby ocenić, czy istnieją statystycznie istotne różnice między wynikami algorytmów PRS i MS dla każdej funkcji i wymiaru. W tym kontekście, możemy sformułować hipotezę zerową (H0) i hipotezę alternatywną (H1):
-
-Hipoteza zerowa (H0): Nie ma istotnej różnicy między wynikami algorytmów PRS i MS.
-Hipoteza alternatywna (H1): Istnieje istotna różnica między wynikami algorytmów PRS i MS.
-Możemy użyć testu t-studenta dla dwóch niezależnych prób, aby porównać średnie wyniki algorytmów. Wartości p-wartości poniżej pewnego poziomu istotności (na przykład 0.05) sugerują odrzucenie hipotezy zerowej.
 
 **Test hipotez zerowych**
 
-Przeprowadźmy testy hipotez dla kilku przypadków:
+Test hipotezy zerowej można przeprowadzić, aby ocenić, czy istnieją statystycznie istotne różnice między wynikami algorytmów PRS i MS dla każdej funkcji i wymiaru. W tym kontekście, możemy sformułować następujące hipotezy:
 
 _Wymiar 2 dla funkcji Ackley:_
+H0: Średnie wyniki PRS i MS są równe.
+H1: Średnie wyniki PRS i MS są różne.
+
+_Wymiar 2 dla funkcji Rastrigina:_
+H0: Średnie wyniki PRS i MS są równe.
+H1: Średnie wyniki PRS i MS są różne.
+
+_Wymiar 10 dla funkcji Ackley:_
 H0: Średnie wyniki PRS i MS są równe.
 H1: Średnie wyniki PRS i MS są różne.
 
@@ -149,12 +179,23 @@ H1: Średnie wyniki PRS i MS są różne.
 _Wymiar 20 dla funkcji Ackley:_
 H0: Średnie wyniki PRS i MS są równe.
 H1: Średnie wyniki PRS i MS są różne.
+
+_Wymiar 20 dla funkcji Rastrigina:_
+H0: Średnie wyniki PRS i MS są równe.
+H1: Średnie wyniki PRS i MS są różne.
+
 Przeprowadźmy te testy przy założonym poziomie istotności α=0.05.
 
-__Wyniki testów hipotezowe:__
+__Wyniki testów hipotez zerowych:__
 
-_Dwa wymiary dla funkcji Ackley:_
-p-wartość < 0.05 (przy założonym poziomie istotności): Odrzucamy H0, istnieje istotna różnica między wynikami PRS i MS.
+_2 wymiary dla funkcji Ackley:_
+p-wartość < 0.05: Odrzucamy H0, istnieje istotna różnica między wynikami PRS i MS.
+
+_2 wymiary dla funkcji Rastrigina:_
+p-wartość < 0.05: Odrzucamy H0, istnieje istotna różnica między wynikami PRS i MS.
+
+_10 wymiarów dla funkcji Ackley:_
+p-wartość < 0.05: Odrzucamy H0, istnieje istotna różnica między wynikami PRS i MS.
 
 _10 wymiarów dla funkcji Rastrigina:_
 p-wartość < 0.05: Odrzucamy H0, istnieje istotna różnica między wynikami PRS i MS.
@@ -162,14 +203,14 @@ p-wartość < 0.05: Odrzucamy H0, istnieje istotna różnica między wynikami PR
 _20 wymiarów dla funkcji Ackley:_
 p-wartość < 0.05: Odrzucamy H0, istnieje istotna różnica między wynikami PRS i MS.
 
-Podsumowując, na podstawie wyników testów hipotezowych możemy stwierdzić, że istnieją statystycznie istotne różnice między wynikami algorytmów PRS i MS dla badanych przypadków.
+_20 wymiarów dla funkcji Rastrigina:_
+p-wartość < 0.05: Odrzucamy H0, istnieje istotna różnica między wynikami PRS i MS.
+
+Na podstawie wyników testów hipotezowych możemy stwierdzić, że istnieją statystycznie istotne różnice między wynikami algorytmów PRS i MS dla badanych przypadków. Natomiast p-value największą wartość (_0.001726_) usyskaliśmy dla funkcji _Ackleygo_ i 10 wymiarów.
+
+
 
 
 ***Podsumowanie:***
-Na podstawie analizy histogramów i boxplotów dla różnych wymiarów funkcji Ackley, wydaje się, że oba algorytmy (MS i PRS) osiągają zbliżone wyniki.
-Brak znaczących różnic w rozkładach wyników sugeruje, że oba algorytmy są konkurencyjne w kontekście funkcji Ackley w badanych wymiarach.
-Analiza dla innych funkcji i wymiarów powinna być przeprowadzona w podobny sposób w celu uzyskania pełniejszej perspektywy.
-
-
-#### Wnioski 
-Wyniki analizy wskazują na istotne statystycznie różnice między algorytmami MS a PRS dla obu funkcji i różnych wymiarów. Algorytm MS okazał się bardziej efektywny w minimalizacji funkcji, co potwierdzają istotne różnice statystyczne.
+W przeprowadzonej analizie porównawczej algorytmów Poszukiwania Przypadkowego (PRS) i Metody Wielokrotnego Startu (MS) na funkcjach Ackley'a i Rastrigina, wykazano, że niezależnie od wymiaru MS wykazuje znacznie większą skuteczność w minimalizacji obu funkcji w porównaniu do PRS. Analiza wykresów, histogramów i boxplotów potwierdza te wyniki, a przeprowadzone testy hipotez zerowych dodatkowo potwierdzają istotne różnice między wynikami obu algorytmów. W związku z tym, Metoda Wielokrotnego Startu (MS) wydaje się być bardziej efektywną opcją w kontekście minimalizacji funkcji Ackley'a i Rastrigina, zwłaszcza w przypadku problemów o większych wymiarach.
+</div>
