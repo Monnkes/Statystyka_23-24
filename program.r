@@ -1,5 +1,5 @@
-library(plyr)
-library(ggplot2)
+# library(plyr)
+# library(ggplot2)
 
 
 pure_random_search <- function(objective_function, domain, num_points, dimensions) {
