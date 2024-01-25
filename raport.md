@@ -16,8 +16,48 @@ Celem tego projektu było porównanie efektywności dwóch z trzech algorytmów 
 - Poszukiwanie Przypadkowe (PRS)
 Algorytm PRS polega na losowaniu punktów z rozkładem jednostajnym w określonej dziedzinie poszukiwań. Dla każdej funkcji i wymiaru losowano odpowiednią liczbę punktów.
 
+```R
+pure_random_search <- function(objective_function, num_points,  domain) {
+  best_point <- numeric(length(domain))
+  best_value <- Inf
+  
+  for (i in 1:num_points) {
+    random_point <- runif(length(domain)/2, min = domain[, 1], max = domain[, 2])
+    value <- objective_function(random_point)
+    if (value < best_value) {
+      best_value <- value
+      best_point <- random_point
+    }
+  }
+  
+  return(best_value)
+}
+```
+
 - Metoda Wielokrotnego Startu (MS)
 Algorytm MS polega na losowaniu punktów, a następnie uruchamianiu algorytmu optymalizacji lokalnej (L-BFGS-B) z każdego z tych punktów startowych. Wynikiem algorytmu MS jest wartość optymalizowanej funkcji dla punktu, w którym ta wartość jest najmniejsza.
+
+```R
+multi_start <- function(objective_function, num_points, domain) {
+  best_point <- numeric(length(domain))
+  best_value <- Inf
+  total_calls <- 0
+  
+  for (i in 1:num_points) {
+    start_point <- runif(length(domain)/2, min = domain[, 1], max = domain[, 2])
+    
+    result <- optim(par = start_point, fn = objective_function, method = "L-BFGS-B")
+    total_calls <- total_calls + result$counts["function"]
+    
+    if (result$value < best_value) {
+      best_value <- result$value
+      best_point <- result$par
+    }
+  }
+  
+  return(c(best_value,total_calls))
+}
+```
 
 #### Funkcje Minimalizowane
 Do analizy wybrano funkcje Ackley'a i Rastrigina. Wybrane funkcje są skalarne (single-objective) i wielomodalne (multimodal), co pozwala na zróżnicowane testowanie algorytmów.
@@ -30,7 +70,6 @@ Zastosowano funkcję replicate() do powtarzalnych obliczeń, zachowując wyrówn
 #### Budżet Obliczeniowy
 Dla algorytmu MS, liczba punktów startowych wyniosła 100, a średnia liczba wywołań z uruchomień MS była przyjętą wartością budżetu dla algorytmu PRS.
 
-<br><br><br><br><br><br>
 
 #### Wyniki
 | Algorytm | Dim | ackley_function | rastrigin_function |
@@ -43,7 +82,7 @@ Dla algorytmu MS, liczba punktów startowych wyniosła 100, a średnia liczba wy
 |          | 20  | 19.718255       | 222.17043          |
 </div>
 
-
+<br><br><br><br>
 #### Wykresy
 
 __Wykres gęstości i dystrybuant__ 
@@ -112,7 +151,7 @@ __Wykresy pudełkowe__
 __Porównanie__
 
 <p align="center">
-  <img src="Plots/BOXPLOT_MSvsPRS.png" style="width: 690px; height: 420px;" alt="BOXPLOT_MSvsPRS.png">
+  <img src="Plots/BOXPLOTS_MSvsPRS.png" style="width: 690px; height: 420px;" alt="BOXPLOT_MSvsPRS.png">
 </p>
 
 <p align="center">
@@ -211,6 +250,6 @@ Na podstawie wyników testów hipotezowych możemy stwierdzić, że istnieją st
 
 
 
-***Podsumowanie:***
+#### Podsumowanie:
 W przeprowadzonej analizie porównawczej algorytmów Poszukiwania Przypadkowego (PRS) i Metody Wielokrotnego Startu (MS) na funkcjach Ackley'a i Rastrigina, wykazano, że niezależnie od wymiaru MS wykazuje znacznie większą skuteczność w minimalizacji obu funkcji w porównaniu do PRS. Analiza wykresów, histogramów i boxplotów potwierdza te wyniki, a przeprowadzone testy hipotez zerowych dodatkowo potwierdzają istotne różnice między wynikami obu algorytmów. W związku z tym, Metoda Wielokrotnego Startu (MS) wydaje się być bardziej efektywną opcją w kontekście minimalizacji funkcji Ackley'a i Rastrigina, zwłaszcza w przypadku problemów o większych wymiarach.
 </div>
